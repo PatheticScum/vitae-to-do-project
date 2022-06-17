@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Демо Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #77E0E8">
+
+<header>
+    <!--navbar-->
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">Add some information about the album below, the author, or any other
+                        background context. Make it a few sentences long so folks can pick up some informative tidbits.
+                        Then, link them off to some social networking sites or contact information.</p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                        <li><a href="#" class="text-white">Like on Facebook</a></li>
+                        <li><a href="#" class="text-white">Email me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center">
+                <strong>TO-DO</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+    <!--navbar-->
+</header>
+
+<main>
+    <!--to do list form creation-->
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-bold">Your To Do list</h1>
+                <p class="lead text-muted">Add to-do list here, and you can delete it as well as can update.</p>
+                <form method="post" action="{% url 'index' %}">
+                    {% csrf_token %}
+
+                    <div>
+                        <h3 style="color: #722988">Title</h3>
+                        {{ form.title }}
+                    </div>
+
+                    <div>
+                        <h3 style="color: #722988">Content</h3>
+                        {{ form.content }}
+                    </div>
+
+
+                    <button type="submit" style="background-color: #8E46AE; color: #77E0E8" class="btn">Create</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!--to do list form creation-->
+
+    {% for todo in todos %}
+
+    <!--to-dos-->
+    <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+            <h4 class="display-5 fw-bold text-white">{{todo.title}}</h4>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4">{{todo.content}}</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
+                    {% if request.user == form.author %}
+
+                    <div>
+                        <a class="btn btn-outline-light" style="background-color: #6B1CA9;"
+                           href="{% url 'delete' todo.id %}">Delete</a>
+                    </div>
+
+                    <div>
+                        <a class="btn btn-outline-light ml " style="background-color: #E0BB65;"
+                           href="{% url 'update' todo.id %}">Update</a>
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border"></div>
+    <!--to-dos-->
+
+    {% endfor %}
+
+
+</main>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#" style="color: #6B1CA9">Back to top</a>
+        </p>
+        <p class="mb-1" style="color: #6B1CA9">Pathetic Scum</p>
+    </div>
+</footer>
+
+
+</body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+</html>

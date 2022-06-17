@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Delete </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body style="background-color: #6B1CA9">
+
+<main>
+    <div class="container d-flex justify-content-center">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p>Are you sure you want to delete <i> {{item}} </i> ?</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn" style="background-color: #05F0EA;" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn" style="background-color: #05F0EA;">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="login row align-items-center g-lg-5 py-5">
+            <div class="col-lg-7 text-center text-lg-start">
+                <h3 class="display-4 fw-bold mb-3 d-flex justify-content-center" style="color: #DBE544">Deletion</h3>
+                <p class="col-lg-10 fs-4" style="color: #44E564">Are you sure you want to delete <i> {{item}} </i> ?</p>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5">
+
+                <a class="btn btn-outline-light" style="background-color: #05F0EA;"
+                   href="{% url 'index' %}">Cancel</a>
+
+                <button type="button" class="btn btn-outline-light" style="background-color: #05F0EA;"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+</html>
